@@ -23,6 +23,21 @@
 	
 	<context:component-scan base-package="com.google.code" />
 	
+	<!-- Configure the multipart resolver -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes 2MB -->
+        <beans:property name="maxUploadSize" value="2000000"/>
+    </beans:bean>
+
+    <!-- Configure the file upload directory-->
+    <beans:bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+        <beans:constructor-arg>
+        	<beans:value>C:/temp/</beans:value>
+        </beans:constructor-arg>
+    </beans:bean>
+    
+    <beans:bean id="uploadItem" class="com.google.code.domain.UploadItem" />
+	
 	
 	
 </beans:beans>
