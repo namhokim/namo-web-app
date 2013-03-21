@@ -20,6 +20,7 @@ public class AppEntry extends Application {
         Router router = new Router(getContext());
   
         router.attach("/hello", HelloResource.class);
+        router.attachDefault(Default.class);
         
         return router;
 	}
