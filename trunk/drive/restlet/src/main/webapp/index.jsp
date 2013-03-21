@@ -15,7 +15,7 @@
 <h1>File Exchange Web Service API</h1>
 <p>2013.3.21 r.9</p>
 <div>
-	<a href="app/upload">올리기</a> / <a href="app/download">받기</a>
+	<a href="upload.html">올리기</a> / <a href="app/download">받기</a>
 </div>
 </body>
 </html>

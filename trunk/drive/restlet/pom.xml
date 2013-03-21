@@ -21,11 +21,20 @@
 
   <dependencies>
 	<!-- RESTlet -->
-
 	<dependency>
 	   <groupId>${org.restlet-type}</groupId>  
 	   <artifactId>org.restlet.ext.servlet</artifactId>  
 	   <version>${org.restlet-version}</version>  
+	</dependency>
+	<dependency>
+	   <groupId>${org.restlet-type}</groupId>  
+	   <artifactId>org.restlet.ext.fileupload</artifactId>  
+	   <version>${org.restlet-version}</version>  
+	</dependency>
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>2.4</version>
 	</dependency>
 	
 	<!-- Servlet -->
