@@ -15,16 +15,37 @@
     </repository>
   </repositories>
   <properties>
-  	<org.restlet-version>org.restlet.jee</org.restlet-version>
+  	<org.restlet-type>org.restlet.jee</org.restlet-type>
+  	<org.restlet-version>2.1.2</org.restlet-version>
   </properties>
 
   <dependencies>
 	<!-- RESTlet -->
+
 	<dependency>
-	   <groupId>${org.restlet-version}</groupId>  
-	   <artifactId>org.restlet</artifactId>  
-	   <version>2.1.2</version>  
-	</dependency> 
+	   <groupId>${org.restlet-type}</groupId>  
+	   <artifactId>org.restlet.ext.servlet</artifactId>  
+	   <version>${org.restlet-version}</version>  
+	</dependency>
+	
+	<!-- Servlet -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.5</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet.jsp</groupId>
+		<artifactId>jsp-api</artifactId>
+		<version>2.1</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
 	
 	<!-- Test -->
     <dependency>
