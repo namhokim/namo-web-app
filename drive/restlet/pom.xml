@@ -36,6 +36,32 @@
 		<artifactId>commons-io</artifactId>
 		<version>2.4</version>
 	</dependency>
+	<dependency>
+		<groupId>${org.restlet-type}</groupId>
+		<artifactId>org.restlet.ext.velocity</artifactId>
+		<version>${org.restlet-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>${org.restlet-type}</groupId>
+		<artifactId>org.restlet.ext.slf4j</artifactId>
+		<version>${org.restlet-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jul-to-slf4j</artifactId>
+		<version>1.7.2</version>
+	</dependency>
+		<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>1.7.2</version>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.17</version>
+	</dependency>
+	            
 	
 	<!-- Servlet -->
 	<dependency>
