@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.restlet.data.MediaType;
 import org.restlet.data.Status;
 import org.restlet.ext.fileupload.RestletFileUpload;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
+import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
@@ -36,6 +38,8 @@ public class Upload extends ServerResource {
         
         // 3. Request is parsed by the handler which generates a
         // list of FileItems
+//        Request req = getRequest();
+//        req.getEntity().setCharacterSet(Eu)
         items = upload.parseRequest(getRequest());
     	
 		// Process only the uploaded item called "fileToUpload" and
@@ -54,7 +58,16 @@ public class Upload extends ServerResource {
 		}
 		
 		setStatus(Status.SUCCESS_CREATED);		// 201
-		return new StringRepresentation("Uploaded");
+		StringRepresentation sr = new StringRepresentation(
+			"<html><body>업로드 완료 - <a href=\"download\">다운로드</a><body><html>");
+		sr.setMediaType(MediaType.TEXT_HTML);
+		return sr;
+	}
+	
+	@Get
+	public Representation getHandler() {
+		//Response.getCurrent().redirectPermanent("../upload.html");
+		return new StringRepresentation("what the...");
 	}
 	
 }

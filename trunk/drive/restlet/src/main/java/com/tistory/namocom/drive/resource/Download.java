@@ -46,7 +46,11 @@ public class Download extends ServerResource {
 				logger.debug("download::file {}", file.getAbsoluteFile());
 				if (dq.isRemove) {
 					file.delete();
-					return new StringRepresentation(name + " was deleted.");
+					StringRepresentation sr = new StringRepresentation(
+							"<html><body>" + name
+							+ " was deleted. - <a href=\"../download\">back to list</a><body><html>");
+						sr.setMediaType(MediaType.TEXT_HTML);
+					return sr;
 				} else {
 					return new FileRepresentation(file, MediaType.APPLICATION_OCTET_STREAM);
 				}
@@ -75,19 +79,13 @@ public class Download extends ServerResource {
 			 */
 			String baseRefPath = r.getBaseRef().getPath();
 			String basePath = r.getPath();
-			this.filePath = basePath.replaceAll(baseRefPath, "").replace('/', '\\');
-			if(filePath.contains("%")) {
-				try {
-					filePath = URLDecoder.decode(filePath, "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					logger.error(e.getMessage());
-				}
-			}
+			this.filePath = urlDecoding(
+					basePath.replaceAll(baseRefPath, "").replace('/', '\\'));
 			
 			logger.debug("baseRefPath : {}", baseRefPath);
 			logger.debug("basePath : {}", basePath);
 			
-			this.lastSegment = request.getOriginalRef().getLastSegment();
+			this.lastSegment = urlDecoding(request.getOriginalRef().getLastSegment());
 
 			String query = r.getQuery();
 			this.isRemove = (query != null && query.equals("action=remove"));
@@ -104,6 +102,17 @@ public class Download extends ServerResource {
 		
 		public boolean isRemove() {
 			return isRemove;
+		}
+		
+		public String urlDecoding(String original) {
+			if(original.contains("%")) {
+				try {
+					return URLDecoder.decode(original, "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					logger.error(e.getMessage());
+				}
+			}
+			return original;
 		}
 	}
 	
@@ -124,15 +133,15 @@ public class Download extends ServerResource {
 			
 			try {
 				FileRepresentation fr = FileRepresentationHelper.get(
-						"/com/tistory/namocom/drive/template/Release.vm", MediaType.TEXT_HTML);
+						"/com/tistory/namocom/drive/template/download.vm", MediaType.TEXT_HTML);
 				fr.setCharacterSet(CharacterSet.UTF_8);
 					
 				TemplateRepresentation tr = new TemplateRepresentation(fr, MediaType.TEXT_HTML);
 				
 				// make the data
 				Map<String,Object> data = new HashMap<String, Object>();
-				data.put("title", basePath);
-				data.put("listTitle", dir.toString());
+				data.put("title", "download");
+				data.put("listTitle", "files:");
 				
 				StringBuffer sb = new StringBuffer();
 				File [] fList = dir.listFiles();
