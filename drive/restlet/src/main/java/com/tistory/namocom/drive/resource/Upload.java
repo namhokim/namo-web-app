@@ -34,6 +34,7 @@ public class Upload extends ServerResource {
         
         // 2. Create a new file upload handler based on the Restlet
         RestletFileUpload upload = new RestletFileUpload(factory);
+        upload.setHeaderEncoding("UTF-8");	// IE problem
         List<FileItem> items;
         
         // 3. Request is parsed by the handler which generates a
