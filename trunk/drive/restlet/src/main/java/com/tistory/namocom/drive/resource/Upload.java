@@ -34,7 +34,7 @@ public class Upload extends ServerResource {
         
         // 2. Create a new file upload handler based on the Restlet
         RestletFileUpload upload = new RestletFileUpload(factory);
-        upload.setHeaderEncoding("UTF-8");	// IE problem
+        upload.setHeaderEncoding("UTF-8");
         List<FileItem> items;
         
         // 3. Request is parsed by the handler which generates a
@@ -46,23 +46,32 @@ public class Upload extends ServerResource {
 		// Process only the uploaded item called "fileToUpload" and
         // save it on disk
 		boolean found = false;
-		for (final Iterator<FileItem> it = items.iterator();
-				it.hasNext() && !found;) {
-			FileItem fi = it.next();
-			 if (fi.getFieldName().equals("file")) {
-				 String name = fi.getName();
-                 found = true;
-                 File file = new File(AppEntry.RELEASE_PATH + "\\" + name);
-                 if(file.exists()) file.delete();
-                 fi.write(file);
-             }
+		try {
+			for (final Iterator<FileItem> it = items.iterator();
+					it.hasNext() && !found;) {
+				FileItem fi = it.next();
+				 if (fi.getFieldName().equals("file")) {
+					 String name = getFinalFilename(fi.getName());
+	                 found = true;
+	                 File file = new File(AppEntry.RELEASE_PATH + "\\" + name);
+	                 if(file.exists()) file.delete();
+	                 fi.write(file);
+	             }
+			}
+			
+			setStatus(Status.SUCCESS_CREATED);		// 201
+			StringRepresentation sr = new StringRepresentation(
+				"<html><body>업로드 완료 - <a href=\"download\">다운로드</a><body><html>");
+			sr.setMediaType(MediaType.TEXT_HTML);
+			return sr;
+		} catch(Exception ex) {
+			return new StringRepresentation("Error - " + ex.getMessage());
 		}
-		
-		setStatus(Status.SUCCESS_CREATED);		// 201
-		StringRepresentation sr = new StringRepresentation(
-			"<html><body>업로드 완료 - <a href=\"download\">다운로드</a><body><html>");
-		sr.setMediaType(MediaType.TEXT_HTML);
-		return sr;
+	}
+	
+	private String getFinalFilename(String original) {
+		File file = new File(original);
+		return file.getName();
 	}
 	
 	@Get
