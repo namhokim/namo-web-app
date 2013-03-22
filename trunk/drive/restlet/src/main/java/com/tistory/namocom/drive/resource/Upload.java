@@ -47,7 +47,7 @@ public class Upload extends ServerResource {
 			 if (fi.getFieldName().equals("file")) {
 				 String name = fi.getName();
                  found = true;
-                 File file = new File(AppEntry.RELEASE_PATH + name);
+                 File file = new File(AppEntry.RELEASE_PATH + "\\" + name);
                  if(file.exists()) file.delete();
                  fi.write(file);
              }
