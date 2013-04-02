@@ -29,7 +29,7 @@
       <path refid="dependency.class.path"/>
   </path>
 
-  <!-- Teach Ant how to use the Hibernate Tools -->
+  <!-- 앤트에서 하이버네이트 사용법 설명하기 -->
   <taskdef name="hibernatetool"
            classname="org.hibernate.tool.ant.HibernateToolTask"
            classpathref="project.class.path"/>
@@ -48,7 +48,7 @@ against the database file--use when application is not running">
       </java>
   </target>
 
-  <!-- Generate the java code for all mapping files in our source tree -->
+  <!-- 소스 트리에 있는 모든 매핑 파일의 자바 코드 생성하기 -->
   <target name="codegen" depends="prepare"
           description="Generate Java source from the O/R mapping files">
     <hibernatetool destdir="${source.root}">
