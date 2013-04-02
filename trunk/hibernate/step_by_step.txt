@@ -1,0 +1,36 @@
+Harnessing Hibernate (하이버네이트 프로그래밍)
+James Elliott(제임스 엘리어트), Timothy O'Brien(티모시 오브라이언), Ryan Fowler(라이언 파울러)
+한빛미디어(주)
+
+
+1. 자바 환경 설치
+ http://www.oracle.com/technetwork/java/javase/downloads/index.html
+ > java -version
+
+2. 앤트(Ant) 설치
+ http://ant.apache.org 에서 .zip 바이너리 배포 받아서 압축을 풀고,
+ 예) apache-ant-1.9.0-bin.zip
+ ANT_HOME, PATH 환경변수 등록
+ > ant -version
+
+3. 앤트용 메이븐 태스크(Maven Tasks for Ant)
+ http://maven.apache.org/ant-tasks/index.html
+ 예) maven-ant-tasks-2.1.3.jar
+ %ANT_HOME%\lib 디렉토리로 복사
+ > ant -diagnostics | grep "maven" | grep "bytes"
+ > ant -diagnostics | find "maven" | find "bytes"
+
+4. HSQLDB 데이터베이스 엔진 사용
+ http://hsqldb.org/
+ 예) hsqldb-2.2.9.zip
+
+5. 하이버네이트 코어 사용
+ http://www.hibernate.org/
+ 예) hibernate-release-4.2.0.Final.zip
+
+6. 프로젝트 구조 설정하기
+ > mkdir src\com\oreilly\hh\data
+
+7. 예제소스
+ http://www.hanb.co.kr/exam/1674/
+
