@@ -1,0 +1,3 @@
+>ant codegen
+>ant prepare
+>ant schema

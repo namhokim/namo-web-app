@@ -1,0 +1,7 @@
+>ant prepare
+>ant codegen
+>ant schema
+>ant ctest
+>ant db
+SELECT * FROM RECORD
+>ant qtest
