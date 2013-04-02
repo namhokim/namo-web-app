@@ -48,7 +48,7 @@ against the database file--use when application is not running">
       </java>
   </target>
 
-  <!-- Generate the java code for all mapping files in our source tree -->
+  <!-- 소스 트리에 있는 모든 매핑 파일에 대한 자바 코드 생성 -->
   <target name="codegen" depends="prepare"
           description="Generate Java source from the O/R mapping files">
     <hibernatetool destdir="${source.root}">
@@ -70,7 +70,7 @@ against the database file--use when application is not running">
     </copy>
   </target>
 
-  <!-- Generate the schemas for all mapping files in our class tree -->
+  <!-- 클래스 트리에 있는 모든 매핑 파일에 대한 스키마 생성 -->
   <target name="schema" depends="prepare"
           description="Generate DB schema from the O/R mapping files">
 
