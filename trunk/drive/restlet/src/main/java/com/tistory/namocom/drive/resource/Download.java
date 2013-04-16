@@ -45,12 +45,7 @@ public class Download extends ServerResource {
 			}  else if (file.isFile()) {
 				logger.debug("download::file {}", file.getAbsoluteFile());
 				if (dq.isRemove) {
-					file.delete();
-					StringRepresentation sr = new StringRepresentation(
-							"<html><body>" + name
-							+ " was deleted. - <a href=\"../download\">back to list</a><body><html>");
-						sr.setMediaType(MediaType.TEXT_HTML);
-					return sr;
+					return remove(file, name);
 				} else {
 					return new FileRepresentation(file, MediaType.APPLICATION_OCTET_STREAM);
 				}
@@ -64,6 +59,30 @@ public class Download extends ServerResource {
 	}
 
 	
+	private Representation remove(File file, String filename) {
+		
+		try {
+			file.delete();
+			
+			// make the data model
+			Map<String,Object> dm = new HashMap<String, Object>();
+			dm.put("filename", filename);
+			
+			// get template
+			FileRepresentation fr = FileRepresentationHelper.get(
+					"/com/tistory/namocom/drive/template/after_delete.vm", MediaType.TEXT_HTML);
+			fr.setCharacterSet(CharacterSet.UTF_8);
+
+			// make template
+			TemplateRepresentation tr = new TemplateRepresentation(fr, MediaType.TEXT_HTML);
+			tr.setDataModel(dm);
+			return tr;
+		} catch (Exception e) {
+			return new StringRepresentation(e.getMessage() + " - Error in remove");
+		}
+	}
+
+
 	class DownloadRequestor {
 		
 		final Logger logger = LoggerFactory.getLogger(DownloadRequestor.class);

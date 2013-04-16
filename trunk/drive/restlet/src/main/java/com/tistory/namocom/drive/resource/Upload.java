@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.restlet.Response;
+import org.restlet.data.CharacterSet;
 import org.restlet.data.MediaType;
 import org.restlet.data.Status;
 import org.restlet.ext.fileupload.RestletFileUpload;
@@ -16,6 +18,7 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
 import com.tistory.namocom.drive.AppEntry;
+import com.tistory.namocom.drive.helper.FileRepresentationHelper;
 
 public class Upload extends ServerResource {
 
@@ -60,10 +63,10 @@ public class Upload extends ServerResource {
 			}
 			
 			setStatus(Status.SUCCESS_CREATED);		// 201
-			StringRepresentation sr = new StringRepresentation(
-				"<html><body>업로드 완료 - <a href=\"download\">다운로드</a><body><html>");
-			sr.setMediaType(MediaType.TEXT_HTML);
-			return sr;
+			Representation fr = FileRepresentationHelper.get(
+					"/com/tistory/namocom/drive/template/after_upload.html", MediaType.TEXT_HTML);
+			fr.setCharacterSet(CharacterSet.UTF_8);
+			return fr;
 		} catch(Exception ex) {
 			return new StringRepresentation("Error - " + ex.getMessage());
 		}
@@ -76,7 +79,7 @@ public class Upload extends ServerResource {
 	
 	@Get
 	public Representation getHandler() {
-		//Response.getCurrent().redirectPermanent("../upload.html");
+		Response.getCurrent().redirectPermanent("../upload.html");
 		return new StringRepresentation("what the...");
 	}
 	

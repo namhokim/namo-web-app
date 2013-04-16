@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>삭제 완료</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../../css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+${filename} was deleted. - <a href="../download">back to list</a>
+</body>
+</html>
