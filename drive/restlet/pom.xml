@@ -7,17 +7,18 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>drive.restlet Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <repositories>
-    <repository>
-    <id>maven-restlet</id>
-    <name>Public online Restlet repository</name>
-    <url>http://maven.restlet.org</url>
-    </repository>
-  </repositories>
-  <properties>
-  	<org.restlet-type>org.restlet.jee</org.restlet-type>
-  	<org.restlet-version>2.1.2</org.restlet-version>
-  </properties>
+	<repositories>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Restlet Framework repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+	</repositories>
+	<properties>
+		<org.restlet-type>org.restlet.jee</org.restlet-type>
+		<org.restlet-version>2.2.0</org.restlet-version>
+		<org.junit-version>4.11</org.junit-version>
+	</properties>
 
   <dependencies>
 	<!-- RESTlet -->
@@ -86,7 +87,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
+      <version>${org.junit-version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
