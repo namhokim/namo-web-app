@@ -63,10 +63,17 @@ public class Upload extends ServerResource {
 			}
 			
 			setStatus(Status.SUCCESS_CREATED);		// 201
-			Representation fr = FileRepresentationHelper.get(
-					"/com/tistory/namocom/drive/template/after_upload.html", MediaType.TEXT_HTML);
-			fr.setCharacterSet(CharacterSet.UTF_8);
-			return fr;
+
+			String query = getRequest().getOriginalRef().getQuery();
+			if (query!=null && query.contains("dnd"))
+			{
+				return new StringRepresentation("OK");
+			} else {
+				Representation fr = FileRepresentationHelper.get(
+						"/com/tistory/namocom/drive/template/after_upload.html", MediaType.TEXT_HTML);
+				fr.setCharacterSet(CharacterSet.UTF_8);
+				return fr;
+			}
 		} catch(Exception ex) {
 			return new StringRepresentation("Error - " + ex.getMessage());
 		}
